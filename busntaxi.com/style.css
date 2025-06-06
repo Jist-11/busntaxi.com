@@ -1,0 +1,124 @@
+/* General Body Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+    background-image: linear-gradient(to right bottom, #2563eb, #3b82f6, #60a5fa, #93c5fd, #fb923c, #f97316);
+    background-attachment: fixed; 
+    background-size: cover; 
+    color: #334155; 
+}
+
+/* Hero Section Styles */
+.gradient-hero {
+    /* Background is inherited from body */
+}
+
+/* Card Hover Effect */
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Animation for Items on Scroll */
+.animated-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.animated-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.btn-primary { }
+.btn-outline { }
+
+.lang-switcher-btn { }
+.lang-switcher-btn.active { }
+.lang-switcher-btn:not(.active) { }
+
+/* Detail Page Specific Styles */
+.detail-page {
+    padding-top: 7.5rem; 
+    padding-bottom: 4rem; 
+    min-height: 100vh;
+    background-color: #f1f5f9; /* bg-slate-100 to override body gradient for these pages */
+}
+
+.detail-page h2 { }
+.detail-page h3 { }
+.detail-page p, .detail-page li { }
+.detail-page ul { }
+
+/* Back Button on Detail Pages */
+.back-button {
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+/* Service Link Item Styling */
+.service-link-item { }
+
+/* Booking Page Specific Styles */
+.booking-page-background {
+    background-image: none !important; 
+    background-color: #374151; /* Tailwind's bg-gray-700 */
+}
+
+.booking-page-background h2 { 
+    color: white; 
+}
+
+.booking-tab {
+    @apply py-3 px-6 text-center font-semibold text-slate-600 cursor-pointer flex-1 transition-colors duration-200;
+    border-bottom: 3px solid transparent;
+}
+.active-booking-tab {
+    @apply text-orange-500;
+    border-bottom-color: #f97316; /* orange-500 */
+}
+.booking-input {
+    @apply w-full px-4 py-2.5 border border-slate-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-shadow duration-150 text-slate-700;
+}
+
+/* WhatsApp Floating Action Button */
+.whatsapp-fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366; 
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.whatsapp-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom Notification Modal Styles */
+#notificationModal.hidden {
+    display: none;
+}
+/* Tailwind classes are used directly in HTML for #notificationModal, 
+   but you can add more custom styles here if needed, e.g., for transitions */
+/*
+#notificationModal {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+#notificationModal.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+*/
+
+/* Ensuring fixed header doesn't hide page anchors */
+html {
+  scroll-padding-top: 7rem; 
+}
