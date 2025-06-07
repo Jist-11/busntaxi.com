@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register as a Driver | BusnTaxi</title>
+  <meta name="description" content="Become a BusnTaxi driver and start earning by providing reliable transportation services across India.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Join BusnTaxi as a Driver - Drive & Earn">
+  <meta property="og:description" content="Become a BusnTaxi driver and start earning by providing reliable transportation services across India.">
+  <meta property="og:image" content="https://busntaxi.com/assets/driver-og.jpg">
+  <meta property="og:url" content="https://busntaxi.com/driver.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BusnTaxi">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Join BusnTaxi as a Driver - Drive & Earn">
+  <meta name="twitter:description" content="Become a BusnTaxi driver and start earning by providing reliable transportation services across India.">
+  <meta name="twitter:image" content="https://busntaxi.com/assets/driver-og.jpg">
+
+  <link rel="stylesheet" href="style2.css" />
+</head>
+<body>
+  <div class="container">
+    <form id="driverForm" class="form-card">
+      <h2>🚖 Register as a Driver | BusnTaxi</h2>
+
+      
+<button id="toggleLanguage" type="button" class="lang-btn">🌐 हिंदी में देखिए</button>
+      <div class="input-group">
+        <input type="text" name="fullname" required />
+        <label>Full Name</label>
+      </div>
+
+      <div class="input-group">
+        <input type="tel" name="phone" required pattern="[0-9]{10}" />
+        <label>Phone Number</label>
+      </div>
+
+      <div class="input-group">
+        <input type="email" name="email" required />
+        <label>Email Address</label>
+      </div>
+
+      <div class="input-group">
+        <input type="text" name="license" required />
+        <label>Driving License No.</label>
+      </div>
+
+      <div class="input-group">
+        <input type="text" name="vehicle" required />
+        <label>Vehicle Type (e.g. Sedan, Bus)</label>
+      </div>
+
+      <div class="input-group">
+        <input type="text" name="city" required />
+        <label>City of Operation</label>
+      </div>
+
+      <button type="submit">Register</button>
+      <p id="responseMsg"></p>
+
+      <div class="back-link">
+        <a href="index.html">← Back to Home</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="script2.js"></script>
+</body>
+</html>
