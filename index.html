@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusnTaxi.com - Your Trusted Travel Partner</title>
+    <meta name="description"
+        content="Book taxis and buses effortlessly with BusnTaxi. Enjoy safe, affordable, and timely rides across India.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader"
+        style="position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#60a5fa,#93c5fd,#ffe066,#ff7e29);transition:opacity 0.5s;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="spin">
+                <circle cx="32" cy="32" r="28" stroke="#2563eb" stroke-width="8" opacity="0.2" />
+                <circle cx="32" cy="32" r="28" stroke="#ff7e29" stroke-width="8" stroke-dasharray="44 100" />
+            </svg>
+            <span
+                style="margin-top:1rem;font-size:1.2rem;font-weight:700;color:#2563eb;letter-spacing:1px;">BusnTaxi.com</span>
+        </div>
+    </div>
+    <!-- Sticky Navigation Bar -->
+    <header>
+        <nav class="container">
+            <h1 id="homeBrandLink" data-key="companyName">BusnTaxi.com</h1>
+            <div style="display:flex;align-items:center;gap:1rem;">
+                <a data-key="registerDriver" href="driver.html">Register as a Driver</a>
+                <button class="btn-primary" id="headerBookNowButton" data-key="bookNow">Book Now</button>
+                <div style="display:flex;align-items:center;gap:0.2rem;">
+                    <button id="langEn" class="lang-switcher-btn active">EN</button>
+                    <button id="langHi" class="lang-switcher-btn">हि</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Booking Section (Glassmorphism Hero) -->
+    <section class="gradient-hero" style="padding-top:6.5rem;">
+        <div class="booking-glass animated-item">
+            <h2>Book Your Ride</h2>
+            <div class="trust-icons">
+                <span title="Safe & Secure"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg></span>
+                <span title="24/7 Support"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                    </svg></span>
+                <span title="Fast & Reliable"><svg fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path d="M3 12h18M3 12l6-6M3 12l6 6" />
+                    </svg></span>
+            </div>
+            <div class="mb-6 flex border-b border-slate-200 justify-center">
+                <button id="heroOneWayTab" class="booking-tab active-booking-tab" data-trip-type="oneWay">One
+                    Way</button>
+                <button id="heroRoundTripTab" class="booking-tab" data-trip-type="roundTrip">Round Trip</button>
+            </div>
+            <form id="heroBookingForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="heroTransportType" class="block text-sm font-medium text-slate-700 mb-1">Transport
+                            Type</label>
+                        <select id="heroTransportType" name="transportType" class="booking-input">
+                            <option value="taxi">Taxi</option>
+                            <option value="bus">Bus</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="heroNumPassengers" class="block text-sm font-medium text-slate-700 mb-1">No. of
+                            Passengers</label>
+                        <select id="heroNumPassengers" name="numPassengers" class="booking-input">
+                            <option value="1-4">1-4</option>
+                            <option value="5-8">5-8</option>
+                            <option value="9+">9+</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label for="heroPickupCity" class="block text-sm font-medium text-slate-700 mb-1">Pickup
+                        City</label>
+                    <select id="heroPickupCity" name="pickupCity" class="booking-input"></select>
+                </div>
+                <div>
+                    <label for="heroDestinationCity" class="block text-sm font-medium text-slate-700 mb-1">Destination
+                        City</label>
+                    <select id="heroDestinationCity" name="destinationCity" class="booking-input"></select>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="heroTripDate" class="block text-sm font-medium text-slate-700 mb-1">Trip
+                            Date</label>
+                        <input type="date" id="heroTripDate" name="tripDate" class="booking-input"
+                            placeholder="DD-MM-YYYY">
+                    </div>
+                    <div id="heroReturnDateWrapper" class="hidden">
+                        <label for="heroReturnDate" class="block text-sm font-medium text-slate-700 mb-1">Return
+                            Date</label>
+                        <input type="date" id="heroReturnDate" name="returnDate" class="booking-input"
+                            placeholder="DD-MM-YYYY">
+                    </div>
+                </div>
+                <div>
+                    <label for="heroPhoneNumber" class="block text-sm font-medium text-slate-700 mb-1">Enter Phone
+                        No.</label>
+                    <input type="tel" id="heroPhoneNumber" name="phoneNumber" class="booking-input"
+                        placeholder="e.g. 9555175500">
+                </div>
+                <div class="my-4 p-3 bg-slate-100 rounded-md text-sm text-slate-600 text-center">
+                    [reCAPTCHA placeholder - "I'm not a robot"]
+                </div>
+                <div style="display:flex;justify-content:center;">
+                    <button type="submit" class="btn-primary text-base" style="min-width:180px;">Submit</button>
+                </div>
+            </form>
+            <div style="display:flex;gap:0.5rem;justify-content:center;margin-top:0.5rem;flex-wrap:wrap;">
+                <span class="trust-badge"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                    </svg> 24/7 Support</span>
+                <span class="trust-badge"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg> Safe & Secure</span>
+                <span class="trust-badge"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path d="M3 12h18M3 12l6-6M3 12l6 6" />
+                    </svg> Fast & Reliable</span>
+            </div>
+        </div>
+    </section>
+    <!-- Trusted By Section after booking hero -->
+    <section class="trusted-by-section animated-item"
+        style="margin-top: -2rem; margin-bottom: 2.5rem; text-align: center;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+            <div style="font-size: 1.2rem; font-weight: 700; color: var(--primary-blue);">Trusted by 10,000+ travelers
+            </div>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <span class="trust-badge"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                    </svg> 24/7 Support</span>
+                <span class="trust-badge"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg> Verified Drivers</span>
+                <span class="trust-badge"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path d="M3 12h18M3 12l6-6M3 12l6 6" />
+                    </svg> Fast & Reliable</span>
+            </div>
+        </div>
+    </section>
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" title="Back to Top" aria-label="Back to Top"
+        style="display:none;position:fixed;bottom:100px;right:32px;"><svg width="28" height="28" fill="none"
+            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 15l7-7 7 7" />
+        </svg></button>
+    <!-- Main Content (all other sections, unchanged) -->
+    <div id="pageViewContainer">
+        <!-- ... all other sections (features, about, services, detail pages, etc.) ... -->
+    </div>
+    <!-- WhatsApp Floating Button and Footer remain unchanged -->
+
+    <!-- Booking Page -->
+    <div id="bookingPage" class="detail-page booking-page-background container mx-auto px-4 hidden">
+        <button class="back-button">&larr; Back to Home</button>
+        <h2 class="text-white text-center">Book Your Ride</h2>
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl max-w-2xl mx-auto">
+            <div class="mb-6 flex border-b border-slate-200">
+                <button id="oneWayTab" class="booking-tab active-booking-tab" data-trip-type="oneWay">One Way</button>
+                <button id="roundTripTab" class="booking-tab" data-trip-type="roundTrip">Round Trip</button>
+            </div>
+            <form id="bookingForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="transportType" class="block text-sm font-medium text-slate-700 mb-1">Transport
+                            Type</label>
+                        <select id="transportType" name="transportType" class="booking-input">
+                            <option value="taxi">Taxi</option>
+                            <option value="bus">Bus</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="numPassengers" class="block text-sm font-medium text-slate-700 mb-1">No. of
+                            Passengers</label>
+                        <select id="numPassengers" name="numPassengers" class="booking-input">
+                            <option value="1-4">1-4</option>
+                            <option value="5-8">5-8</option>
+                            <option value="9+">9+</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label for="pickupCity" class="block text-sm font-medium text-slate-700 mb-1">Pickup City</label>
+                    <select id="pickupCity" name="pickupCity" class="booking-input"></select>
+                </div>
+                <div>
+                    <label for="destinationCity" class="block text-sm font-medium text-slate-700 mb-1">Destination
+                        City</label>
+                    <select id="destinationCity" name="destinationCity" class="booking-input"></select>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="tripDate" class="block text-sm font-medium text-slate-700 mb-1">Trip Date</label>
+                        <input type="date" id="tripDate" name="tripDate" class="booking-input" placeholder="DD-MM-YYYY">
+                    </div>
+                    <div id="returnDateWrapper" class="hidden">
+                        <label for="returnDate" class="block text-sm font-medium text-slate-700 mb-1">Return
+                            Date</label>
+                        <input type="date" id="returnDate" name="returnDate" class="booking-input"
+                            placeholder="DD-MM-YYYY">
+                    </div>
+                </div>
+                <div>
+                    <label for="phoneNumber" class="block text-sm font-medium text-slate-700 mb-1">Enter Phone
+                        No.</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" class="booking-input"
+                        placeholder="e.g. 9555175500">
+                </div>
+                <div class="my-4 p-3 bg-slate-100 rounded-md text-sm text-slate-600 text-center">
+                    [reCAPTCHA placeholder - "I'm not a robot"]
+                </div>
+                <div>
+                    <button type="submit" class="w-full btn-primary text-base">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Make Why Choose Us more prominent and add Learn More link -->
+    <main class="container mx-auto px-4 py-16 space-y-20">
+        <!-- Feature Cards Section -->
+        <section id="features" class="animated-item">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white" data-key="featuresTitle">Why Choose
+                BusnTaxi.com?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1: Reliability -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover transition-all duration-300">
+                    <div
+                        class="flex items-center justify-center bg-blue-100 text-blue-600 rounded-full w-16 h-16 mb-6 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-slate-800" data-key="feature1Title">Reliability
+                        & Trust</h3>
+                    <ul class="space-y-2 text-slate-600 text-center">
+                        <li data-key="feature1Point1">Experienced Drivers</li>
+                        <li data-key="feature1Point2">Transparent Pricing</li>
+                        <li data-key="feature1Point3">24/7 Customer Support</li>
+                        <li data-key="feature1Point4">Safe & Secure Travel</li>
+                    </ul>
+                </div>
+                <!-- Card 2: Services -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover transition-all duration-300">
+                    <div
+                        class="flex items-center justify-center bg-orange-100 text-orange-500 rounded-full w-16 h-16 mb-6 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                            </path>
+                            <path d="M7 17h10"></path>
+                            <path d="M6 17H4v-4h2"></path>
+                            <path d="M18 17h-2v-4h2"></path>
+                            <circle cx="8" cy="17" r="1"></circle>
+                            <circle cx="16" cy="17" r="1"></circle>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-slate-800" data-key="feature2Title">Our Services
+                    </h3>
+                    <ul class="space-y-2 text-slate-600 text-center">
+                        <li data-key="feature2Point1">Outstation Taxi Service</li>
+                        <li data-key="feature2Point2">Local City Rides</li>
+                        <li data-key="feature2Point3">Airport Transfers</li>
+                        <li data-key="feature2Point4">Bus Bookings & Rentals</li>
+                    </ul>
+                </div>
+                <!-- Card 3: Fleet -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover transition-all duration-300">
+                    <div
+                        class="flex items-center justify-center bg-green-100 text-green-600 rounded-full w-16 h-16 mb-6 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 16.5V18a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-1.5"></path>
+                            <path d="M18 12h.01"></path>
+                            <path d="M6 12h.01"></path>
+                            <path d="M10 12h.01"></path>
+                            <path d="M12 12h.01"></path>
+                            <path d="M14 12h.01"></path>
+                            <path d="M16 12h.01"></path>
+                            <path d="M2 9.5A2.5 2.5 0 0 1 4.5 7h15A2.5 2.5 0 0 1 22 9.5V12H2Z"></path>
+                            <path d="M6 7V2.5A2.5 2.5 0 0 1 8.5 0h7A2.5 2.5 0 0 1 18 2.5V7"></path>
+                            <path d="M8 18v-1.5"></path>
+                            <path d="M16 18v-1.5"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-slate-800" data-key="feature3Title">Modern &
+                        Safe Fleet</h3>
+                    <ul class="space-y-2 text-slate-600 text-center">
+                        <li data-key="feature3Point1">Wide Range: Sedans, SUVs, Buses</li>
+                        <li data-key="feature3Point2">Clean & Well-Maintained Vehicles</li>
+                        <li data-key="feature3Point3">GPS-Enabled for Your Safety</li>
+                        <li data-key="feature3Point4">Comfortable & Hygienic</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Destination Details Section (replaces inline Gaumukh detail page) -->
+    <section class="destination-cards-section animated-item" style="margin-top:2.5rem;">
+        <h2 class="text-4xl font-bold text-center mb-12 text-white">Explore the Char Dham & More</h2>
+        <div class="destination-cards-grid">
+            <div class="destination-card">
+                <h3>Badrinath</h3>
+                <p>Famous for the Badrinath Temple, a sacred pilgrimage site nestled in the Himalayas. Scenic beauty,
+                    hot springs, and spiritual vibes.</p>
+                <a href="pages/badrinath.html" class="see-details-btn">See Details</a>
+            </div>
+            <div class="destination-card">
+                <h3>Kedarnath</h3>
+                <p>Home to the revered Kedarnath Temple, surrounded by majestic peaks. Trekking, spirituality, and
+                    breathtaking mountain views.</p>
+                <a href="pages/kedarnath.html" class="see-details-btn">See Details</a>
+            </div>
+            <div class="destination-card">
+                <h3>Gangotri</h3>
+                <p>Source of the holy Ganga river. Visit the Gangotri Temple, enjoy pristine nature, and experience
+                    Himalayan serenity.</p>
+                <a href="pages/gangotri.html" class="see-details-btn">See Details</a>
+            </div>
+            <div class="destination-card">
+                <h3>Gaumukh</h3>
+                <p>The glacier snout of the Ganga. A challenging trek, stunning landscapes, and a must-visit for
+                    adventure seekers and pilgrims.</p>
+                <a href="pages/gaumukh.html" class="see-details-btn">See Details</a>
+            </div>
+            <div class="destination-card">
+                <h3>Yamunotri</h3>
+                <p>Origin of the Yamuna river. Visit the Yamunotri Temple, hot springs, and enjoy the tranquil beauty of
+                    the Garhwal Himalayas.</p>
+                <a href="pages/yamunotri.html" class="see-details-btn">See Details</a>
+            </div>
+        </div>
+    </section>
+    <!-- End Destination Details Section -->
+
+
+
+    <!-- Modern Services & Destinations Grid Section -->
+    <section class="info-cards-section animated-item" style="margin-top:2.5rem;">
+        <div class="info-cards-grid">
+            <div class="info-card">
+                <h3>Bus and Taxi services In Uttarakhand</h3>
+                <ul>
+                    <li><a href="pages/haridwar-to-delhi.html">Haridwar to Delhi</a></li>
+                    <li><a href="pages/roorkee-to-delhi.html">Roorkee to Delhi</a></li>
+                    <li><a href="pages/rishikesh-to-delhi.html">Rishikesh to Delhi</a></li>
+                    <li><a href="pages/dehradun-to-delhi.html">Dehradun to Delhi</a></li>
+                    <li><a href="pages/mussoorie-to-delhi.html">Mussoorie to Delhi</a></li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>Bus and Taxi services In Delhi (NCR)</h3>
+                <ul>
+                    <li><a href="pages/delhi-to-haridwar.html">Delhi to Haridwar</a></li>
+                    <li><a href="pages/delhi-to-roorkee.html">Delhi to Roorkee</a></li>
+                    <li><a href="pages/delhi-to-rishikesh.html">Delhi to Rishikesh</a></li>
+                    <li><a href="pages/delhi-to-dehradun.html">Delhi to Dehradun</a></li>
+                    <li><a href="pages/delhi-to-mussoorie.html">Delhi to Mussoorie</a></li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>Popular Places To Visit In Uttarakhand</h3>
+                <ul>
+                    <li><a href="pages/haridwar.html">Haridwar</a></li>
+                    <li><a href="pages/rishikesh.html">Rishikesh</a></li>
+                    <li><a href="pages/dehradun.html">Dehradun</a></li>
+                    <li><a href="pages/mussoorie.html">Mussoorie</a></li>
+                    <li><a href="pages/nainital.html">Nainital</a></li>
+                    <li><a href="pages/roorkee.html">Roorkee</a></li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>Chardham Yatra In Uttarakhand</h3>
+                <ul>
+                    <li><a href="#">Chardham</a></li>
+                    <li><a href="pages/badrinath.html">Badrinath</a></li>
+                    <li><a href="pages/kedarnath.html">Kedarnath</a></li>
+                    <li><a href="pages/gangotri.html">Gangotri</a></li>
+                    <li><a href="pages/yamunotri.html">Yamunotri</a></li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>Religious places in Uttarakhand</h3>
+                <ul>
+                    <li><a href="pages/hemkund-sahib.html">Hemkund Sahib</a></li>
+                    <li><a href="pages/tungnath.html">Tungnath</a></li>
+                    <li><a href="pages/devprayag.html">Devprayag</a></li>
+                    <li><a href="pages/jageshwar.html">Jageshwar</a></li>
+                    <li><a href="pages/gaumukh.html">Gaumukh</a></li>
+                    <li><a href="pages/badrinath.html">Badrinath</a></li>
+                    <li><a href="pages/kedarnath.html">Kedarnath</a></li>
+                    <li><a href="pages/gangotri.html">Gangotri</a></li>
+                    <li><a href="pages/yamunotri.html">Yamunotri</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- End Modern Services & Destinations Grid Section -->
+
+    <!-- Footer: add links to policy.html, terms.html, driver.html, WhatsApp/contact -->
+    <!-- Custom Footer for BusnTaxi Agency -->
+    <footer class="agency-footer">
+        <div class="footer-container">
+            <!-- Brand Info -->
+            <div class="footer-brand">
+                <h2>BusnTaxi.com</h2>
+                <p>Your trusted travel partner across India. Book with ease and ride with peace.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../policy.html">Privacy Policy</a></li>
+                    <li><a href="../terms.html">Terms & Conditions</a></li>
+                    <li><a href="../driver.html">Register as Driver</a></li>
+                    <li><a href="https://wa.me/919555175500" target="_blank">WhatsApp Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>📞 <a href="tel:+919555175500">+91 95551 75500</a></p>
+                <p>✉️ <a href="mailto:contact@busntaxi.com">contact@busntaxi.com</a></p>
+            </div>
+        </div>
+
+        <!-- Social Icons -->
+        <!-- Footer Social Media Icons -->
+        <div class="footer-social">
+            <h3 class="footer-social-heading">Follow Us</h3>
+            <div class="footer-social-icons">
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/busntaxi_travels" target="_blank" aria-label="Instagram">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" />
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@Busntaxi_Travels" target="_blank" aria-label="YouTube">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" />
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/busntaxi-travels-01867a2bb/" target="_blank" aria-label="LinkedIn">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" />
+                </a>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-credit">
+            <p>&copy; 2024 BusnTaxi.com. All rights reserved.</p>
+            <p>Website made by <strong>Manan</strong>. Want a site like this? 👉 <a
+                    href="https://jist-11.github.io/business_plan/" target="_blank">Book Yours</a></p>
+        </div>
+    </footer>
+
+    <!-- Notification Modal -->
+    <div id="notificationModal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[1000] hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full text-center">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                <svg class="h-10 w-10 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-semibold text-slate-800 mb-2">Booking Submitted!</h3>
+            <p class="text-slate-600 mb-6">Your booking request has been received. We will contact you shortly for
+                confirmation. (This is a demo notification)</p>
+            <button id="closeNotificationBtn" class="btn-primary">Okay</button>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919555175500" target="_blank" rel="noopener noreferrer" class="whatsapp-fab">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-whatsapp"
+            viewBox="0 0 16 16">
+            <path
+                d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943s-.182-.133-.38-.232" />
+        </svg>
+    </a>
+</body>
+
+</html>
